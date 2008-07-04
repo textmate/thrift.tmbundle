@@ -144,7 +144,7 @@
 			<key>comment</key>
 			<string>begin the definition list</string>
 			<key>end</key>
-			<string>$ ^</string>
+			<string>(?x)$.^ # this regex should never end</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -173,11 +173,15 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>$|^</string>
 					<key>name</key>
 					<string>meta.const.thrift</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#value</string>
@@ -206,9 +210,16 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>$|^</string>
 					<key>name</key>
 					<string>meta.typedef.thrift</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -223,11 +234,11 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.enum.thrift</string>
+							<string>entity.name.type.enum.thrift</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>(?&lt;=\})|$</string>
 					<key>name</key>
 					<string>meta.enum.thrift</string>
 					<key>patterns</key>
@@ -235,8 +246,24 @@
 						<dict>
 							<key>begin</key>
 							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.enum.begin.thrift</string>
+								</dict>
+							</dict>
 							<key>end</key>
 							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.enum.end.thrift</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -283,11 +310,11 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.senum.thrift</string>
+							<string>entity.name.type.senum.thrift</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>(?&lt;=\})|$</string>
 					<key>name</key>
 					<string>meta.senum.thrift</string>
 					<key>patterns</key>
@@ -295,8 +322,24 @@
 						<dict>
 							<key>begin</key>
 							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.senum.begin.thrift</string>
+								</dict>
+							</dict>
 							<key>end</key>
 							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.senum.end.thrift</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -338,11 +381,11 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.struct.thrift</string>
+							<string>entity.name.type.struct.thrift</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>(?&lt;=\})|$</string>
 					<key>name</key>
 					<string>meta.struct.thrift</string>
 					<key>patterns</key>
@@ -356,8 +399,24 @@
 						<dict>
 							<key>begin</key>
 							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.struct.begin.thrift</string>
+								</dict>
+							</dict>
 							<key>end</key>
 							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.struct.end.thrift</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -385,11 +444,11 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.exception.thrift</string>
+							<string>entity.name.type.exception.thrift</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>(?&lt;=\})|$</string>
 					<key>name</key>
 					<string>meta.exception.thrift</string>
 					<key>patterns</key>
@@ -397,8 +456,24 @@
 						<dict>
 							<key>begin</key>
 							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.exception.begin.thrift</string>
+								</dict>
+							</dict>
 							<key>end</key>
 							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.exception.end.thrift</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -426,7 +501,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.service.thrift</string>
+							<string>entity.name.type.service.thrift</string>
 						</dict>
 						<key>3</key>
 						<dict>
@@ -436,11 +511,11 @@
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.service.extends.thrift</string>
+							<string>entity.other.inherited-class.thrift</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>$</string>
+					<string>(?&lt;=\})|$</string>
 					<key>name</key>
 					<string>meta.service.thrift</string>
 					<key>patterns</key>
@@ -448,8 +523,24 @@
 						<dict>
 							<key>begin</key>
 							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.service.begin.thrift</string>
+								</dict>
+							</dict>
 							<key>end</key>
 							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.service.end.thrift</string>
+								</dict>
+							</dict>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -493,7 +584,7 @@
 										</dict>
 									</dict>
 									<key>end</key>
-									<string>$</string>
+									<string>$|^</string>
 									<key>name</key>
 									<string>meta.service.function.thrift</string>
 									<key>patterns</key>
@@ -501,8 +592,24 @@
 										<dict>
 											<key>begin</key>
 											<string>\(</string>
+											<key>beginCaptures</key>
+											<dict>
+												<key>0</key>
+												<dict>
+													<key>name</key>
+													<string>punctuation.definition.arguments.begin.thrift</string>
+												</dict>
+											</dict>
 											<key>end</key>
 											<string>\)</string>
+											<key>endCaptures</key>
+											<dict>
+												<key>0</key>
+												<dict>
+													<key>name</key>
+													<string>punctuation.definition.arguments.end.thrift</string>
+												</dict>
+											</dict>
 											<key>patterns</key>
 											<array>
 												<dict>
@@ -533,8 +640,24 @@
 												<dict>
 													<key>begin</key>
 													<string>\(</string>
+													<key>beginCaptures</key>
+													<dict>
+														<key>0</key>
+														<dict>
+															<key>name</key>
+															<string>punctuation.definition.arguments.begin.thrift</string>
+														</dict>
+													</dict>
 													<key>end</key>
 													<string>\)</string>
+													<key>endCaptures</key>
+													<dict>
+														<key>0</key>
+														<dict>
+															<key>name</key>
+															<string>punctuation.definition.arguments.end.thrift</string>
+														</dict>
+													</dict>
 													<key>patterns</key>
 													<array>
 														<dict>
@@ -548,6 +671,10 @@
 													</array>
 												</dict>
 											</array>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#comments</string>
 										</dict>
 									</array>
 								</dict>
@@ -565,30 +692,78 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.thrift</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>#.*</string>
+					<string>(#).*\n?</string>
 					<key>name</key>
 					<string>comment.line.number-sign.thrift</string>
 				</dict>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.thrift</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>//.*</string>
+					<string>(//).*\n?</string>
 					<key>name</key>
 					<string>comment.line.double-slash.thrift</string>
 				</dict>
 				<dict>
 					<key>begin</key>
 					<string>/\*\*</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.thrift</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>\*/</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.thrift</string>
+						</dict>
+					</dict>
 					<key>name</key>
 					<string>comment.block.documentation.thrift</string>
 				</dict>
 				<dict>
 					<key>begin</key>
 					<string>/\*</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.thrift</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>\*/</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.thrift</string>
+						</dict>
+					</dict>
 					<key>name</key>
 					<string>comment.block.thrift</string>
 				</dict>
@@ -617,7 +792,15 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>[,;]|$</string>
+			<string>[,;]|(?=[)#])|$</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.fields.thrift</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.field.thrift</string>
 			<key>patterns</key>
@@ -652,14 +835,14 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>(?=[,;])|$</string>
+					<string>(?=[,;]|[)#])|$</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>begin</key>
 							<string>=</string>
 							<key>end</key>
-							<string>[,;]|$</string>
+							<string>(?=[,;]|[)#])|$</string>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -711,7 +894,7 @@
 					<string>'</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.thrift</string>
@@ -721,7 +904,7 @@
 					<string>'</string>
 					<key>endCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.thrift</string>
@@ -735,7 +918,7 @@
 					<string>"</string>
 					<key>beginCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.thrift</string>
@@ -745,20 +928,36 @@
 					<string>"</string>
 					<key>endCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.thrift</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.double..thrift</string>
+					<string>string.quoted.double.thrift</string>
 				</dict>
 				<dict>
 					<key>begin</key>
 					<string>\[</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.array.begin.thrift</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>\]</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.array.end.thrift</string>
+						</dict>
+					</dict>
 					<key>name</key>
 					<string>meta.array.thrift</string>
 					<key>patterns</key>
@@ -776,8 +975,24 @@
 				<dict>
 					<key>begin</key>
 					<string>\{</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.map.begin.thrift</string>
+						</dict>
+					</dict>
 					<key>end</key>
 					<string>\}</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.map.end.thrift</string>
+						</dict>
+					</dict>
 					<key>name</key>
 					<string>meta.map.thrift</string>
 					<key>patterns</key>
