@@ -136,7 +136,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?=(struct|s?enum|service|const|typedef|exception)\b)</string>
+			<string>(?=(struct|s?enum|union|service|const|typedef|exception)\b)</string>
 			<key>comment</key>
 			<string>begin the definition list</string>
 			<key>end</key>
@@ -214,6 +214,69 @@
 						<dict>
 							<key>include</key>
 							<string>#comments</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?&lt;!\S)(union)(?!\S)(?:\s+([a-zA-Z_][\w.]*)\s*(?![^\s{]))?</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.union.thrift</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.union.thrift</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?&lt;=\})|$</string>
+					<key>name</key>
+					<string>meta.union.thrift</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;!\S)xsd_all(?!\S)</string>
+							<key>name</key>
+							<string>keyword.other.xsd-all.thrift</string>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>\{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.union.begin.thrift</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\}</string>
+							<key>endCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.union.end.thrift</string>
+								</dict>
+							</dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#comments</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#field</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 				</dict>
